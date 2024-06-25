@@ -4,3 +4,4 @@
 ## 1. Two Sum [22/06/2024]
 ## 9. Palindrome Number [23/06/2024]
 ## 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit [23/06/2024]
+## 995. Minimum Number of K Consecutive Bit Flips [25/06/2024]
