@@ -1,37 +1,51 @@
 package com.thuan6420.yamleetcode
 
 import java.util.Deque
-import java.util.LinkedList
 
 // 1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
 class Solution1438 {
     fun longestSubarray(nums: IntArray, limit: Int): Int {
-        val maxDeque: Deque<Int> = LinkedList()
-        val minDeque: Deque<Int> = LinkedList()
-        var nonResult = 0
-        var numChecking = 0
-        while (numChecking < nums.size) {
-            while (!maxDeque.isEmpty() && nums[numChecking] > nums[maxDeque.peekLast()]) {
+        val maxDeque: Deque<Int> = java.util.ArrayDeque()
+        val minDeque: Deque<Int> = java.util.ArrayDeque()
+        val isAbsoluteDiffLessThanLimit: (Int, Int) -> Boolean = { maxIndex, minIndex ->
+            nums[maxIndex] - nums[minIndex] <= limit
+        }
+        val isGreater: (Int, Int) -> Boolean = { index1, index2 ->
+            nums[index1] > nums[index2]
+        }
+        val isSmaller: (Int, Int) -> Boolean = { index1, index2 ->
+            nums[index1] < nums[index2]
+        }
+        val ensureMax: (Int) -> Int = { index ->
+            while (maxDeque.isNotEmpty() && isGreater(index, maxDeque.peekLast()!!)) {
                 maxDeque.pollLast()
             }
-            while (!minDeque.isEmpty() && nums[numChecking] < nums[minDeque.peekLast()]) {
+            maxDeque.offerLast(index)
+            maxDeque.peekFirst()!!
+        }
+        val ensureMin: (Int) -> Int = { index ->
+            while (minDeque.isNotEmpty() && isSmaller(index, minDeque.peekLast()!!)) {
                 minDeque.pollLast()
             }
-
-            maxDeque.offerLast(numChecking)
-            minDeque.offerLast(numChecking)
-
-            if (nums[maxDeque.peekFirst()] - nums[minDeque.peekFirst()] > limit) {
-                if (maxDeque.peekFirst() == nonResult) {
-                    maxDeque.pollFirst()
-                }
-                if (minDeque.peekFirst() == nonResult) {
-                    minDeque.pollFirst()
-                }
-                nonResult++
-            }
-            numChecking++
+            minDeque.offerLast(index)
+            minDeque.peekFirst()!!
         }
-        return numChecking - nonResult
+        var numOfPositionNotMatch = 0
+        val resolveIndexNotMatch = {
+            if (maxDeque.peekFirst() == numOfPositionNotMatch) {
+                maxDeque.pollFirst()
+            }
+            if (minDeque.peekFirst() == numOfPositionNotMatch) {
+                minDeque.pollFirst()
+            }
+            numOfPositionNotMatch++
+        }
+
+        for (index in nums.indices) {
+            if (isAbsoluteDiffLessThanLimit(ensureMax(index), ensureMin(index)).not()){
+                resolveIndexNotMatch()
+            }
+        }
+        return nums.size - numOfPositionNotMatch
     }
 }
