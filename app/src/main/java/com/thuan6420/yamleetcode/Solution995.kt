@@ -16,15 +16,13 @@ class Solution995 {
             }
             res++
         }
-        var idx = 0
-        while (idx < nums.size) {
-            if (isNeedFlip(idx)) {
-                if (isImpossibleFlip(idx)) {
+        for (i in nums.indices) {
+            if (isNeedFlip(i)) {
+                if (isImpossibleFlip(i)) {
                     return -1
                 }
-                flip(idx)
+                flip(i)
             }
-            idx++
         }
         return res
     }
