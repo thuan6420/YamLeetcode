@@ -23,4 +23,16 @@ class Solution995Test {
         val result = solution995.minKBitFlips(intArrayOf(0, 0, 0, 1, 0, 1, 1, 0), 3)
         assertEquals(3, result)
     }
+
+    @Test
+    fun test_4() {
+        val result = solution995.minKBitFlips(intArrayOf(0,1,1), 2)
+        assertEquals(-1, result)
+    }
+
+    @Test
+    fun test_5() {
+        val result = solution995.minKBitFlips(intArrayOf(0,0,0,1,0,1,1,0), 3)
+        assertEquals(3, result)
+    }
 }
