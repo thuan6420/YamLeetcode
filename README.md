@@ -8,4 +8,4 @@
 ## 3210~100339. Find the Encrypted String [07/07/2024]
 ## 3211~100328. Generate Binary Strings Without Adjacent Zeros [07/07/2024]
 ## 3212~100359. Count Submatrices With Equal Frequency of X and Y [07/07/2024]
-## 3213~100350. Construct String with Minimum Cost [07/07/2024]
+## 3213~100350. Construct String with Minimum Cost -> [Link](https://leetcode.com/problems/construct-string-with-minimum-cost/) [07/07/2024]
